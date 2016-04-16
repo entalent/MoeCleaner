@@ -1,0 +1,203 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="cn.edu.bit.cs.moecleaner.fragment.HomeFragment">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/relativeLayout"
+        android:layout_gravity="center">
+
+        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:id="@+id/view2"
+            app:main_title_size="24dp"
+            app:sub_title_size="16dp"
+            app:sub_title="@string/text_storage_usage"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_centerVertical="true"
+            app:center_circle_color="@color/colorPrimaryDark"
+            app:progress_arc_Color="@color/colorAccent"/>
+
+        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/view3"
+            app:main_title_size="16dp"
+            app:sub_title="@string/text_memory_usage"
+
+            android:layout_marginRight="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp"
+            app:center_circle_color="@color/colorPrimary"
+            app:progress_arc_Color="@color/colorAccent"/>
+
+        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/view4"
+            app:main_title_size="12dp"
+            app:sub_title_size="18dp"
+            app:main_title="@string/text_cpu_usage"
+            android:layout_below="@+id/view3"
+            android:layout_alignLeft="@+id/view3"
+            android:layout_alignStart="@+id/view3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:center_circle_color="@color/colorAccent"
+            app:progress_arc_Color="@color/colorPrimaryDark"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_junk_clean"
+            android:tag="junk_clean">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_delete_sweep_white_24dp"
+                android:padding="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Junk File Clean"
+                android:id="@+id/textView"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_memory_clean"
+            android:tag="memory_clean">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_memory_white_24dp"
+                android:padding="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Memory Clean"
+                android:id="@+id/textView2"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_system_info"
+            android:tag="system_info">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/ic_phone_android_white_24dp"
+                android:padding="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="System Info"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_settings"
+            android:tag="settings">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:src="@drawable/ic_settings_white_24dp"
+                android:padding="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Settings"
+                android:id="@+id/textView4"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView5"
+                android:src="@drawable/ic_settings_white_24dp"
+                android:padding="18dp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Settings"
+                android:id="@+id/textView5"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+</ScrollView>

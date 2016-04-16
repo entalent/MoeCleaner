@@ -1,6 +1,7 @@
 package cn.edu.bit.cs.moecleaner;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,12 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import cn.edu.bit.cs.moecleaner.fragment.BaseMoeFragment;
+import cn.edu.bit.cs.moecleaner.fragment.HomeFragment;
+import cn.edu.bit.cs.moecleaner.fragment.JunkCleanFragment;
+import cn.edu.bit.cs.moecleaner.fragment.MemoryBoostFragment;
+import cn.edu.bit.cs.moecleaner.fragment.SystemInfoFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -37,26 +44,28 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(MainActivity.this, TestActivity.class));
+        //startActivity(new Intent(MainActivity.this, TestActivity.class));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mSectionsPagerAdapter.setViewPager(mViewPager);
+        //缓存！！
+        mViewPager.setOffscreenPageLimit(4);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        */
 
     }
 
@@ -85,46 +95,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    public class SectionsPagerAdapter extends FragmentPagerAdapter implements ViewPagerManager {
+        ViewPager viewPager;
 
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        BaseMoeFragment[] fragments = new BaseMoeFragment[4];
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -132,28 +106,67 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    fragments[0] = new HomeFragment();
+                    fragments[0].setViewPagerManager(this);
+                    break;
+                case 1:
+                    fragments[1] = new JunkCleanFragment();
+                    fragments[1].setViewPagerManager(this);
+                    break;
+                case 2:
+                    fragments[2] = new MemoryBoostFragment();
+                    fragments[2].setViewPagerManager(this);
+                    break;
+                case 3:
+                    fragments[3] = new SystemInfoFragment();
+                    fragments[3].setViewPagerManager(this);
+                    break;
+                default:
+                    return null;
+            }
+            return fragments[position];
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return getString(R.string.title_home);
                 case 1:
-                    return "SECTION 2";
+                    return getString(R.string.title_junk_clean);
                 case 2:
-                    return "SECTION 3";
+                    return getString(R.string.title_memory_boost);
+                case 3:
+                    return getString(R.string.title_system_info);
             }
             return null;
         }
+
+        @Override
+        public void setViewPager(ViewPager vp) {
+            this.viewPager = vp;
+            vp.setAdapter(this);
+        }
+
+        @Override
+        public void setCurrentItem(int index) {
+            viewPager.setCurrentItem(index);
+        }
+
+        public void sendMessageToFragment(int index, Message msg) {
+            fragments[index].getFragmentHandler().sendMessage(msg);
+        }
+    }
+
+    public interface ViewPagerManager {
+        void setViewPager(ViewPager vp);
+        void setCurrentItem(int index);
     }
 }

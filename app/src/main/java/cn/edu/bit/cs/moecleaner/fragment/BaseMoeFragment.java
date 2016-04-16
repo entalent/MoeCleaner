@@ -11,7 +11,11 @@ import cn.edu.bit.cs.moecleaner.MainActivity;
 /**
  * Created by entalent on 2016/4/15.
  */
-public class BaseMoeFragment extends Fragment {
+public abstract class BaseMoeFragment extends Fragment {
+    static final int MSG_REFRESH_CPU_PROGRESSBAR = 0x0,
+                    MSG_JUMPED_FROM_HOME_PAGE = 0x1;
+
+
     MainActivity.ViewPagerManager viewPagerManager;
     FragmentHandler mFragmentHandler = new FragmentHandler(this);
 
@@ -33,10 +37,12 @@ public class BaseMoeFragment extends Fragment {
 
         @Override
         public void handleMessage(Message msg) {
-            final Fragment fragment = mFragmentReference.get();
+            final BaseMoeFragment fragment = mFragmentReference.get();
             if(fragment != null) {
-                //...
+                fragment.handleMessageFromHandler(msg);
             }
         }
     }
+
+    public abstract void handleMessageFromHandler(Message msg);
 }

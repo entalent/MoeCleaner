@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cn.edu.bit.cs.moecleaner.fragment.BaseMoeFragment;
 import cn.edu.bit.cs.moecleaner.fragment.HomeFragment;
@@ -58,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter.setViewPager(mViewPager);
+        mSectionsPagerAdapter.setCurrentItem(0);
         //缓存！！
         mViewPager.setOffscreenPageLimit(4);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,10 +75,22 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        */
-
     }
 
+    long previousBackPressTime = 0;
+    @Override
+    public void onBackPressed() {
+        if(mViewPager.getCurrentItem() != 0) {
+            mViewPager.setCurrentItem(0);
+        }
+        long currentBackPressTime = System.currentTimeMillis();
+        if(currentBackPressTime - previousBackPressTime < 2000) {
+            super.onBackPressed();
+        } else {
+            previousBackPressTime = currentBackPressTime;
+            Toast.makeText(MainActivity.this, getString(R.string.toast_press_back_once_again_to_exit), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setCurrentItem(index);
         }
 
+        @Override
         public void sendMessageToFragment(int index, Message msg) {
             fragments[index].getFragmentHandler().sendMessage(msg);
         }
@@ -168,5 +182,6 @@ public class MainActivity extends AppCompatActivity {
     public interface ViewPagerManager {
         void setViewPager(ViewPager vp);
         void setCurrentItem(int index);
+        void sendMessageToFragment(int index, Message msg);
     }
 }

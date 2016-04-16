@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Junk File Clean"
+                android:text="@string/title_junk_clean"
                 android:id="@+id/textView"
                 android:layout_gravity="center_vertical"
                 android:textColor="#ffffff"/>
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Memory Clean"
+                android:text="@string/title_memory_boost"
                 android:id="@+id/textView2"
                 android:layout_gravity="center_vertical"
                 android:textColor="#ffffff" />
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="System Info"
+                android:text="@string/title_system_info"
                 android:id="@+id/textView3"
                 android:layout_gravity="center_vertical"
                 android:textColor="#ffffff" />

@@ -1,31 +1,44 @@
 package cn.edu.bit.cs.moecleaner.fragment;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.lang.ref.WeakReference;
 
-import cn.edu.bit.cs.moecleaner.MainActivity;
 
 /**
  * Created by entalent on 2016/4/15.
  */
 public abstract class BaseMoeFragment extends Fragment {
+
     static final int MSG_REFRESH_CPU_PROGRESSBAR = 0x0,
                     MSG_JUMPED_FROM_HOME_PAGE = 0x1;
 
+    public static ViewPagerManager viewPagerManager;
 
-    MainActivity.ViewPagerManager viewPagerManager;
     FragmentHandler mFragmentHandler = new FragmentHandler(this);
 
-    public void setViewPagerManager(MainActivity.ViewPagerManager viewPagerManager) {
+    public void setViewPagerManager(ViewPagerManager viewPagerManager) {
         this.viewPagerManager = viewPagerManager;
-        System.out.println(this.viewPagerManager == null);
     }
 
     public FragmentHandler getFragmentHandler() {
         return mFragmentHandler;
+    }
+
+    @Override
+    public void onDestroy() {
+        System.out.println("fragment onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        System.out.println("fragment onCreate");
     }
 
     public static class FragmentHandler extends Handler {

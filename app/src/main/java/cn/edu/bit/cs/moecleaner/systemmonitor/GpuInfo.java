@@ -34,7 +34,9 @@ public class GpuInfo {
 
         public CustomGLSurfaceView (Context context) {
             super(context);
-
+            setEGLConfigChooser(8, 8, 8, 8, 0, 0);
+            mRenderer = new GLRenderer();
+            setRenderer(mRenderer);
         }
     }
 }

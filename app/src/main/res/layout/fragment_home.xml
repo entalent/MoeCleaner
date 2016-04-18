@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="cn.edu.bit.cs.moecleaner.fragment.HomeFragment">
+    tools:context=".ui.fragment.HomeFragment">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:id="@+id/relativeLayout"
         android:layout_gravity="center">
 
-        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+        <cn.edu.bit.cs.moecleaner.ui.customview.CircleProgressBar
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:id="@+id/view2"
@@ -32,7 +32,7 @@
             app:center_circle_color="@color/colorPrimaryDark"
             app:progress_arc_Color="@color/colorAccent"/>
 
-        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+        <cn.edu.bit.cs.moecleaner.ui.customview.CircleProgressBar
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:id="@+id/view3"
@@ -45,7 +45,7 @@
             android:layout_toRightOf="@+id/view2"
             android:layout_toEndOf="@+id/view2" />
 
-        <cn.edu.bit.cs.moecleaner.customview.CircleProgressBar
+        <cn.edu.bit.cs.moecleaner.ui.customview.CircleProgressBar
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/view4"

@@ -1,6 +1,4 @@
-package cn.edu.bit.cs.moecleaner.fragment;
-
-import android.os.Message;
+package cn.edu.bit.cs.moecleaner.ui.fragment;
 
 /**
  * Created by entalent on 2016/4/16.

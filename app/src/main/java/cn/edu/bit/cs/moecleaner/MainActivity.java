@@ -1,7 +1,5 @@
 package cn.edu.bit.cs.moecleaner;
 
-import android.content.Intent;
-import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,24 +9,20 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.edu.bit.cs.moecleaner.fragment.BaseMoeFragment;
-import cn.edu.bit.cs.moecleaner.fragment.HomeFragment;
-import cn.edu.bit.cs.moecleaner.fragment.JunkCleanFragment;
-import cn.edu.bit.cs.moecleaner.fragment.MemoryBoostFragment;
-import cn.edu.bit.cs.moecleaner.fragment.SystemInfoFragment;
-import cn.edu.bit.cs.moecleaner.fragment.ViewPagerManager;
+import cn.edu.bit.cs.moecleaner.ui.fragment.BaseMoeFragment;
+import cn.edu.bit.cs.moecleaner.ui.fragment.HomeFragment;
+import cn.edu.bit.cs.moecleaner.ui.fragment.JunkCleanFragment;
+import cn.edu.bit.cs.moecleaner.ui.fragment.MemoryBoostFragment;
+import cn.edu.bit.cs.moecleaner.ui.fragment.SystemInfoFragment;
+import cn.edu.bit.cs.moecleaner.ui.fragment.ViewPagerManager;
 
 public class MainActivity extends AppCompatActivity implements ViewPagerManager {
 

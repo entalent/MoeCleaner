@@ -1,4 +1,4 @@
-package cn.edu.bit.cs.moecleaner.fragment;
+package cn.edu.bit.cs.moecleaner.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;

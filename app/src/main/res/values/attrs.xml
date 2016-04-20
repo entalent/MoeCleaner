@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleProgressBar">
+        <attr name="main_title_size" format="dimension"/>
+        <attr name="sub_title_size" format="dimension"/>
+        <attr name="main_title_color" format="color"/>
+        <attr name="sub_title_color" format="color"/>
+        <attr name="center_circle_color" format="color"/>
+        <attr name="progress_arc_Color" format="color"/>
+        <attr name="main_title" format="string"/>
+        <attr name="sub_title" format="string"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="LineChart">
+        <attr name="line_width" format="dimension"/>
+        <attr name="line_color" format="color"/>
+        <attr name="line_type" format="enum">
+            <enum name="full_line" value="0"/>
+            <enum name="dotted_line" value="1"/>
+        </attr>
+        <attr name="max_division" format="integer"/>
+    </declare-styleable>
+</resources>

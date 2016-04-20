@@ -11,6 +11,10 @@ import junit.framework.Test;
 
 import cn.edu.bit.cs.moecleaner.databinding.ActivityTestBinding;
 
+/**
+ * Created by entalent on 2016/4/14.
+ * 测试用Activity
+ */
 public class TestActivity extends AppCompatActivity {
 
     @Override

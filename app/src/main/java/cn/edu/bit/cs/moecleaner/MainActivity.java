@@ -24,6 +24,10 @@ import cn.edu.bit.cs.moecleaner.ui.fragment.MemoryBoostFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.SystemInfoFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.ViewPagerManager;
 
+/**
+ * Created by entalent on 2016/4/14.
+ * 主界面，里面有4个Fragment
+ */
 public class MainActivity extends AppCompatActivity implements ViewPagerManager {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;

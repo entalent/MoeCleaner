@@ -1,5 +1,10 @@
 package cn.edu.bit.cs.moecleaner;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,12 +22,14 @@ import android.view.View;
 
 import android.widget.Toast;
 
+import cn.edu.bit.cs.moecleaner.systemmonitor.BasicInfo;
 import cn.edu.bit.cs.moecleaner.ui.fragment.BaseMoeFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.HomeFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.JunkCleanFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.MemoryBoostFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.SystemInfoFragment;
 import cn.edu.bit.cs.moecleaner.ui.fragment.ViewPagerManager;
+import cn.edu.bit.cs.moecleaner.util.HttpRequest;
 
 /**
  * Created by entalent on 2016/4/14.
@@ -36,10 +43,45 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
 
     long previousBackPressTime = 0;
 
+    static final int REQUEST_CODE_CHECK_PHONE_STATE = 0x1,
+                    REQUEST_CODE_STORAGE = 0x2;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //........................
+        if (permissions.length == 0 || grantResults.length == 0) {
+            return;
+        }
+        switch (requestCode) {
+            case REQUEST_CODE_CHECK_PHONE_STATE:
+                break;
+            case REQUEST_CODE_STORAGE:
+                //读写外部存储权限被拒绝
+                if(grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                    Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //startActivity(new Intent(MainActivity.this, TestActivity.class));
+        if(Build.VERSION.SDK_INT >= 23) {
+            if(PackageManager.PERMISSION_GRANTED != checkSelfPermission(Manifest.permission.READ_PHONE_STATE)) {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE_CHECK_PHONE_STATE);
+            }
+
+            if(PackageManager.PERMISSION_GRANTED != checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE);
+            }
+
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,8 +123,6 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
             }
         });
 
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +131,20 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
                         .setAction("Action", null).show();
             }
         });
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String info = BasicInfo.getAllSystemInfo(MainActivity.this);
+                    String res = HttpRequest.sendPost("http://10.2.70.115/collect_info.php", "info=" + info);
+                    System.out.println(res);
+                } catch (Exception e) {
+
+                }
+            }
+        }).start();
     }
 
 
@@ -110,16 +164,18 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -134,21 +190,17 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-
             fragments[0] = new HomeFragment();
             fragments[1] = new JunkCleanFragment();
             fragments[2] = new MemoryBoostFragment();
             fragments[3] = new SystemInfoFragment();
-
             for(int i = 0; i < 4; i++){
                 fragments[i].setViewPagerManager(MainActivity.this);
-                System.out.println(fragments[i].viewPagerManager == null);
             }
         }
 
         @Override
         public Fragment getItem(int position) {
-            System.out.println("getItem " + position + " " + fragments[position].toString());
             return fragments[position];
         }
 

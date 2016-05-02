@@ -12,13 +12,18 @@
 
     </declare-styleable>
 
-    <declare-styleable name="LineChart">
-        <attr name="line_width" format="dimension"/>
+    <declare-styleable name="LineChartFull">
+        <attr name="text_color" format="color"/>
+        <attr name="title_text" format="string"/>
+        <attr name="top_y_text" format="string"/>
+        <attr name="bottom_y_text" format="string"/>
         <attr name="line_color" format="color"/>
         <attr name="line_type" format="enum">
             <enum name="full_line" value="0"/>
             <enum name="dotted_line" value="1"/>
         </attr>
+        <attr name="line_width" format="integer"/>
         <attr name="max_division" format="integer"/>
     </declare-styleable>
+
 </resources>

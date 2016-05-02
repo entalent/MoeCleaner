@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentTop="true"
+android:layout_centerHorizontal="true"
+android:padding="16dp">
+
+
+
+<cn.edu.bit.cs.moecleaner.ui.customview.LineChart
+    android:layout_width="wrap_content"
+    android:layout_height="120dp"
+    android:id="@+id/lineChart"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_toRightOf="@+id/relativeLayout"
+    android:layout_toEndOf="@+id/relativeLayout"
+    android:layout_below="@+id/text_title" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="CPU Usage"
+    android:id="@+id/text_title"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:padding="4dp"/>
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout"
+    android:layout_alignBottom="@+id/lineChart"
+    android:layout_alignTop="@+id/lineChart">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100%"
+        android:id="@+id/text_top"
+        android:paddingRight="8dp"
+        android:maxLines="1"
+        android:layout_alignLeft="@+id/text_bottom"
+        android:layout_alignStart="@+id/text_bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0%"
+        android:id="@+id/text_bottom"
+        android:paddingRight="8dp"
+        android:maxLines="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+
+    </RelativeLayout>

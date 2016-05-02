@@ -116,9 +116,8 @@ public class CircleProgressBar extends View {
     }
 
     public void setProgress(float progress) {
-        if(Float.compare(progress, 0.0f) < 0 || Float.compare(1.0f, progress) < 0) {
-            throw new IllegalArgumentException("The progress should be between 0.0 and 1.0 " + progress);
-        }
+        progress = Math.max(0.0f, progress);
+        progress = Math.min(1.0f, progress);
         this.progress = progress;
 
         updateProgress();

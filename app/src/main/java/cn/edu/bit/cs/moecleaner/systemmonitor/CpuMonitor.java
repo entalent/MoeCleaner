@@ -3,8 +3,10 @@ package cn.edu.bit.cs.moecleaner.systemmonitor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,19 +26,23 @@ public class CpuMonitor {
      * @return CPU usage, a integer between 0 and 100.
      * @throws Exception
      */
-    public static final int getCpuUsage() throws Exception {
-        int usagePercent = 0;
-        ArrayList<String> output = ShellUtil.execCmd("top -n 1");
-        for(String line : output) {
-            if(line.trim().isEmpty()) continue;
-            Matcher matcher = patternCpuUsage.matcher(line);
-            while(matcher.find()) {
-                String str = line.substring(matcher.start(), matcher.end() - 1);
-                usagePercent += Integer.parseInt(str);
+    public static final int getCpuUsage() {
+        try {
+            int usagePercent = 0;
+            ArrayList<String> output = ShellUtil.execCmd("top -n 1");
+            for (String line : output) {
+                if (line.trim().isEmpty()) continue;
+                Matcher matcher = patternCpuUsage.matcher(line);
+                while (matcher.find()) {
+                    String str = line.substring(matcher.start(), matcher.end() - 1);
+                    usagePercent += Integer.parseInt(str);
+                }
+                break;
             }
-            break;
+            return usagePercent;
+        } catch (Exception e) {
+            return 0;
         }
-        return usagePercent;
     }
 
     /**
@@ -44,68 +50,71 @@ public class CpuMonitor {
      * @return the total number of CPU
      * @throws Exception
      */
-    public static final int getCpuCount() throws Exception {
+    public static final int getCpuCount() {
         if(cpuCount <= 0) {
-            ArrayList<String> output = ShellUtil.execCmd("ls /sys/devices/system/cpu");
-            for (String line : output) {
-                if (line.trim().isEmpty()) continue;
-                Matcher matcher = patternCpuCount.matcher(line);
-                if (matcher.matches()) {
-                    cpuCount++;
+            try {
+                ArrayList<String> output = ShellUtil.execCmd("ls /sys/devices/system/cpu");
+                for (String line : output) {
+                    if (line.trim().isEmpty()) continue;
+                    Matcher matcher = patternCpuCount.matcher(line);
+                    if (matcher.matches()) {
+                        cpuCount++;
+                    }
                 }
+            } catch (Exception e){
+                return cpuCount;
             }
         }
         return cpuCount;
     }
 
 
-    public static final int getCpuMaxFreq(int cpuIndex) throws Exception {
-        String cmd = "cat /sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/cpuinfo_max_freq";
-        ArrayList<String> output = ShellUtil.execCmd(cmd);
-        String maxFreqStr = output.get(0);
-        int maxFreq = 0;
+    public static final int getCpuMaxFreq(int cpuIndex) {
         try {
-            maxFreq = Integer.parseInt(maxFreqStr);
+            RandomAccessFile file = new RandomAccessFile("/sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/cpuinfo_max_freq", "r");
+            int ret = Integer.parseInt(file.readLine());
+            file.close();
+            return ret;
         } catch (Exception e) {
-            e.printStackTrace();
+            return 0;
         }
-        return maxFreq;
     }
 
-    public static final int getCpuMinFreq(int cpuIndex) throws Exception {
-        String cmd = "cat /sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/cpuinfo_min_freq";
-        ArrayList<String> output = ShellUtil.execCmd(cmd);
-        String minFreqStr = output.get(0);
-        int minFreq = 0;
+    public static final int getCpuMinFreq(int cpuIndex) {
         try {
-            minFreq = Integer.parseInt(minFreqStr);
+            RandomAccessFile file = new RandomAccessFile("/sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/cpuinfo_min_freq", "r");
+            int ret = Integer.parseInt(file.readLine());
+            file.close();
+            return ret;
         } catch (Exception e) {
-            e.printStackTrace();
+            return 0;
         }
-        return minFreq;
     }
 
-    public static final int getCpuCurFreq(int cpuIndex) throws Exception {
-        String cmd = "cat /sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/scaling_cur_freq";
-        ArrayList<String> output = ShellUtil.execCmd(cmd);
-        String curFreqStr = output.get(0);
-        int curFreq = 0;
+    public static final int getCpuCurFreq(int cpuIndex) {
         try {
-            curFreq = Integer.parseInt(curFreqStr);
+            RandomAccessFile file = new RandomAccessFile("/sys/devices/system/cpu/cpu" + cpuIndex + "/cpufreq/scaling_cur_freq", "r");
+            int ret = Integer.parseInt(file.readLine());
+            file.close();
+            return ret;
         } catch (Exception e) {
-            e.printStackTrace();
+            return 0;
         }
-        return curFreq;
     }
 
-    public static String getCpuName() throws IOException {
-        ArrayList<String> output = ShellUtil.execCmd("cat /proc/cpuinfo");
-        for(String i : output) {
-            String[] strs = i.split(":\\s+", 2);
-            if(strs[0].equals("Hardware")) {
-                return strs[1];
+    public static String getCpuName() {
+        try {
+            RandomAccessFile file = new RandomAccessFile("/proc/cpuinfo", "r");
+            String line;
+            while ((line = file.readLine()) != null) {
+                String[] strs = line.split(":\\s+", 2);
+                if (strs[0].contains("Hardware")) {
+                    return strs[1];
+                }
             }
+            return "N/A";
+        } catch (Exception e) {
+            return "N/A";
         }
-        return output.get(0).split(":\\s+", 2)[1];
     }
 }

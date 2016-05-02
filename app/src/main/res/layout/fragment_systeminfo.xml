@@ -1,14 +1,427 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class=".SystemInfoFragmentBinding">
+        <variable name="phoneModel" type="String"/>
+        <variable name="screenResolution" type="String"/>
+        <variable name="androidVersion" type="String"/>
+        <variable name="imei" type="String"/>
+        <variable name="wlanMac" type="String"/>
+        <variable name="cpuModel" type="String"/>
+        <variable name="cpuCores" type="String"/>
+        <variable name="clockRange" type="String"/>
+        <variable name="memorySize" type="String"/>
+        <variable name="glRenderer" type="String"/>
+        <variable name="glVendor" type="String"/>
+        <variable name="glVersion" type="String"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="8dp"
+                    android:visibility="visible"
+                    android:elevation="8dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/title_basic_information"
+                            android:background="@color/colorPrimaryDark"
+                            android:padding="16dp"
+                            android:id="@+id/textView5" />
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="3"
+                            android:layout_below="@+id/textView5"
+                            android:layout_margin="8dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                style="@style/SystemInfoItemTextStyle"
+                                android:text="@string/item_phone_model"
+                                android:layout_column="0"
+                                android:layout_row="0"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                style="@style/SystemInfoItemTextStyle"
+                                android:text="@string/item_screen_resolution"
+                                android:layout_column="0"
+                                android:layout_row="1"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                style="@style/SystemInfoItemTextStyle"
+                                android:text="@string/item_android_version"
+                                android:layout_column="0"
+                                android:layout_row="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                style="@style/SystemInfoItemTextStyle"
+                                android:text="@string/item_imei_or_meid"
+                                android:layout_column="0"
+                                android:layout_row="3"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                style="@style/SystemInfoItemTextStyle"
+                                android:text="@string/item_wlan_mac"
+                                android:layout_column="0"
+                                android:layout_row="4"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{phoneModel}"
+                                android:id="@+id/textView8"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="0"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{screenResolution}"
+                                android:id="@+id/textView9"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="1"
+                                android:layout_column="1" />
 
 
-    <cn.edu.bit.cs.moecleaner.ui.customview.LineChart
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/view5"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
-</RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{androidVersion}"
+                                android:id="@+id/textView10"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="2"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{imei}"
+                                android:id="@+id/textView11"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="3"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{wlanMac}"
+                                android:id="@+id/textView12"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="4"
+                                android:layout_column="1" />
+
+
+
+                        </GridLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view6"
+                    android:layout_below="@+id/view5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="8dp"
+                    android:visibility="visible"
+                    android:elevation="8dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/title_cpu_mem_information"
+                            android:background="@color/colorPrimaryDark"
+                            android:padding="16dp"
+                            android:id="@+id/textView6"
+                            />
+
+                        <cn.edu.bit.cs.moecleaner.ui.customview.LineChartFull
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chart_cpu_usage"
+                            app:title_text="@string/title_cpu_frequency"
+                            app:top_y_text="100%"
+                            app:bottom_y_text="0%"
+                            app:text_color="@color/colorPrimaryDark"
+                            app:line_color="@color/colorPrimary"
+                            app:line_width="3"
+                            android:layout_below="@+id/textView6"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <cn.edu.bit.cs.moecleaner.ui.customview.LineChartFull
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chart_memory_usage"
+                            app:title_text="@string/title_memory_usage"
+                            app:top_y_text="100%"
+                            app:bottom_y_text="0%"
+                            android:layout_below="@+id/chart_cpu_usage"
+                            app:text_color="@color/colorPrimaryDark"
+                            app:line_color="@color/colorPrimary"
+                            app:line_width="3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:layout_below="@+id/chart_memory_usage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@string/item_cpu_model"
+                                android:layout_column="0"
+                                android:layout_row="0" />
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@string/item_cpu_cores"
+                                android:layout_column="0"
+                                android:layout_row="1" />
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@string/item_clock_range"
+                                android:layout_column="0"
+                                android:layout_row="2" />
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@string/item_memory_size"
+                                android:layout_column="0"
+                                android:layout_row="3" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{cpuModel}"
+                                android:id="@+id/textView15"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="0"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{cpuCores}"
+                                android:id="@+id/textView16"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="1"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{clockRange}"
+                                android:id="@+id/textView17"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="2"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{memorySize}"
+                                android:id="@+id/textView18"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="3"
+                                android:layout_column="1" />
+
+                        </GridLayout>
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view7"
+                    android:layout_below="@+id/view6"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="8dp"
+                    android:elevation="8dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/title_gpu_information"
+                            android:background="@color/colorPrimaryDark"
+                            android:padding="16dp"
+                            android:id="@+id/textView7"
+                            />
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:layout_below="@+id/textView7"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="GL Renderer: "
+                                android:layout_column="0"
+                                android:layout_row="0" />
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="GL Vendor:"
+                                android:layout_column="0"
+                                android:layout_row="1" />
+
+                            <TextView
+                                style="@style/SystemInfoItemTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="GL Version:"
+                                android:layout_column="0"
+                                android:layout_row="2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{glRenderer}"
+                                android:id="@+id/textView19"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="0"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{glVendor}"
+                                android:id="@+id/textView20"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="1"
+                                android:layout_column="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="@{glVersion}"
+                                android:id="@+id/textView21"
+                                style="@style/SystemInfoValueTextStyle"
+                                android:layout_row="2"
+                                android:layout_column="1" />
+
+                        </GridLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:layout_alignParentBottom="true"
+                            android:visibility="visible">
+
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+    </FrameLayout>
+</layout>

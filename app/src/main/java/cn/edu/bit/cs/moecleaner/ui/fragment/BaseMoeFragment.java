@@ -29,18 +29,6 @@ public abstract class BaseMoeFragment extends Fragment {
         return mFragmentHandler;
     }
 
-    @Override
-    public void onDestroy() {
-        System.out.println("fragment onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("fragment onCreate");
-    }
-
     public static class FragmentHandler extends Handler {
         WeakReference<BaseMoeFragment> mFragmentReference;
 

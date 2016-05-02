@@ -3,10 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="memory"
-        android:id="@+id/button"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="内存清理模块，敬请期待^_^"
+        android:id="@+id/textView14"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

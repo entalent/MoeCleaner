@@ -13,4 +13,24 @@
     <string name="text_cpu_usage">CPU</string>
 
     <string name="toast_press_back_once_again_to_exit">Press back once again to exit</string>
+    <string name="title_cpu_frequency">CPU Frequency</string>
+    <string name="title_memory_usage">Memory Usage</string>
+
+    <string name="item_phone_model">Device Model</string>
+    <string name="item_screen_resolution">Screen Resolution</string>
+    <string name="item_android_version">Android Version</string>
+    <string name="item_imei_or_meid">IMEI or MEID</string>
+    <string name="item_wlan_mac">WLAN MAC Address</string>
+    <string name="item_cpu_model">CPU Model</string>
+    <string name="item_cpu_cores">Cores</string>
+    <string name="item_clock_range">Clock Range</string>
+    <string name="item_memory_size">RAM Size</string>
+
+    <string name="title_basic_information">Basic Information</string>
+    <string name="title_cpu_mem_information">CPU &#38; RAM Information</string>
+    <string name="title_gpu_information">GPU Information</string>
+
+    <string name="text_can_clean">Cache Size: </string>
+    <string name="text_scan">Scan for Cache File</string>
+    <string name="text_clean">Clean Cache File!</string>
 </resources>

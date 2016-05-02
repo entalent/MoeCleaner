@@ -10,4 +10,22 @@
     <string name="text_storage_usage">存储空间占用</string>
     <string name="text_memory_usage">内存占用</string>
     <string name="toast_press_back_once_again_to_exit">再按一次退出</string>
+    <string name="title_memory_usage">内存占用率</string>
+    <string name="title_cpu_frequency">CPU频率</string>
+    <string name="title_cpu_mem_information">CPU与RAM状态</string>
+    <string name="title_gpu_information">GPU信息</string>
+    <string name="title_basic_information">基本信息</string>
+    <string name="item_android_version">Android版本</string>
+    <string name="item_clock_range">时钟频率范围</string>
+    <string name="item_cpu_cores">核心数</string>
+    <string name="item_cpu_model">CPU型号</string>
+    <string name="item_imei_or_meid">IMEI或MEID</string>
+    <string name="item_memory_size">RAM大小</string>
+    <string name="item_phone_model">设备型号</string>
+    <string name="item_screen_resolution">屏幕分辨率</string>
+    <string name="item_wlan_mac">WLAN MAC地址</string>
+    <string name="text_cpu_usage">CPU占用</string>
+    <string name="text_can_clean">可清理</string>
+    <string name="text_clean">清理缓存</string>
+    <string name="text_scan">点我扫描缓存</string>
 </resources>

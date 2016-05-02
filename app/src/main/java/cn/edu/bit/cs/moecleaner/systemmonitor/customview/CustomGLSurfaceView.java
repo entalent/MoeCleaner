@@ -12,10 +12,22 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class CustomGLSurfaceView extends GLSurfaceView {
 
-    static String glRenderer,
-                glVendor,
-                glVesion,
-                glExtensions;
+    static String glRenderer;
+    static String glVendor;
+    static String glVersion;
+    static String glExtensions;
+
+    public static String getGlRenderer() {
+        return glRenderer;
+    }
+
+    public static String getGlVendor() {
+        return glVendor;
+    }
+
+    public static String getGlVersion() {
+        return glVersion;
+    }
 
     GLRenderer mRenderer;
 
@@ -31,16 +43,15 @@ public class CustomGLSurfaceView extends GLSurfaceView {
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-            Log.d("SystemInfo", "GL_RENDERER = " +gl.glGetString(GL10.GL_RENDERER));
-            Log.d("SystemInfo", "GL_VENDOR = " + gl.glGetString(GL10.GL_VENDOR));
-            Log.d("SystemInfo", "GL_VERSION = " + gl.glGetString(GL10.GL_VERSION));
-            Log.d("SystemInfo", "GL_EXTENSIONS = " + gl.glGetString(GL10.GL_EXTENSIONS));
-
             glRenderer = gl.glGetString(GL10.GL_RENDERER);
             glVendor = gl.glGetString(GL10.GL_VENDOR);
-            glVesion = gl.glGetString(GL10.GL_VERSION);
+            glVersion = gl.glGetString(GL10.GL_VERSION);
             glExtensions = gl.glGetString(GL10.GL_EXTENSIONS);
 
+            Log.d("SystemInfo", "GL_RENDERER = " + glRenderer);
+            Log.d("SystemInfo", "GL_VENDOR = " + glVendor);
+            Log.d("SystemInfo", "GL_VERSION = " + glVersion);
+            Log.d("SystemInfo", "GL_EXTENSIONS = " + glExtensions);
         }
 
         @Override

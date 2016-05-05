@@ -2,8 +2,10 @@ package cn.edu.bit.cs.moecleaner;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
     static final int REQUEST_CODE_CHECK_PHONE_STATE = 0x1,
                     REQUEST_CODE_STORAGE = 0x2;
 
+    final String VERSION = "1.0";
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -70,6 +74,18 @@ public class MainActivity extends AppCompatActivity implements ViewPagerManager 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean getversion = prefs.getBoolean(VERSION, true);
+        //get the version code
+        if (getversion){
+            //if got, it's first time opening, write a new version code.
+            SharedPreferences.Editor pEdit = prefs.edit();
+            pEdit.putBoolean(VERSION, false);
+            pEdit.commit();
+            startActivity(new Intent(getBaseContext(), WelcomeActivity.class));
+        }
+
 
         //startActivity(new Intent(MainActivity.this, TestActivity.class));
         if(Build.VERSION.SDK_INT >= 23) {

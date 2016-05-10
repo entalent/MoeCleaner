@@ -3,6 +3,7 @@ package cn.edu.bit.cs.moecleaner.ui.fragment;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
@@ -37,6 +38,8 @@ public class JunkCleanFragment extends BaseMoeFragment {
 
     CacheInfoProvider cacheInfoProvider;
 
+    View rootView;
+
     TextView totalCacheSizeText, currentDetailText;
     View startCleanBtnRoot;
     View cleanStatusView;
@@ -53,7 +56,7 @@ public class JunkCleanFragment extends BaseMoeFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_junkclean, container, false);
+        rootView = inflater.inflate(R.layout.fragment_junkclean, container, false);
         totalCacheSizeText = (TextView) rootView.findViewById(R.id.cache_size_text);
         cacheInfoProvider = new CacheInfoProvider(getContext());
         startCleanBtnRoot = rootView.findViewById(R.id.clean_btn_parent);
@@ -221,12 +224,13 @@ public class JunkCleanFragment extends BaseMoeFragment {
                 cleanThreadCount--;
             }
             if(cleanThreadCount == 0) {
-                currentDetailText.setText("clean finished");
+                currentDetailText.setText(getString(R.string.text_clean_cache_finish));
                 cleanBtn.setVisibility(View.GONE);
                 packageCacheListView.setVisibility(View.GONE);
             }
         }
     }
+
 }
 
 

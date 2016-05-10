@@ -29,7 +29,6 @@ public class CacheInfoProvider {
     }
 
     public void scanPackageCacheFile(PackageInfo packageInfo) {
-        System.out.println(packageInfo.packageName);
         File f1 = new File(Environment.getExternalStorageDirectory() + "/Android/data/" + packageInfo.packageName + "/cache");
         File f2 = new File(Environment.getExternalStorageDirectory() + "/Android/data/" + packageInfo.packageName + "/files");
         PackageCacheItem item = new PackageCacheItem();

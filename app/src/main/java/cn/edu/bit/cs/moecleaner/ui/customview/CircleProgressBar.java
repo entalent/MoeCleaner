@@ -143,4 +143,12 @@ public class CircleProgressBar extends View {
     public void setMainTitle(String mainTitle) {
         this.mainTitle = mainTitle;
     }
+
+    public void setCenterCircleColor(int centerCircleColor) {
+        this.centerCircleColor = centerCircleColor;
+    }
+
+    public void setProgressArcColor(int progressArcColor) {
+        this.progressArcColor = progressArcColor;
+    }
 }

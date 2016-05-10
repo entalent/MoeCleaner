@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +40,10 @@ public class JunkCleanListItem extends RelativeLayout {
         appNameText.setText(pm.getApplicationLabel(item.packageInfo.applicationInfo));
         cacheSizeText.setText(TextUtil.formatStorageSizeStr(packageCacheItem.cacheSize));
         appIconImage.setImageDrawable(pm.getApplicationIcon(item.packageInfo.applicationInfo));
+    }
+
+    public CacheInfoProvider.PackageCacheItem getPackageCacheItem() {
+        return this.packageCacheItem;
     }
 
 }

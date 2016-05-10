@@ -29,4 +29,23 @@ public class ShellUtil {
         }
         return ret;
     }
+
+    public static final boolean hasRootAccess() {
+        System.out.println("test");
+        try {
+            Runtime r = Runtime.getRuntime();
+            Process p = r.exec("su -c");
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String ret = "", line;
+            while(null != (line = br.readLine())){
+                ret += line;
+            }
+            System.out.println("len = " + ret.length());
+            System.out.println(ret);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
 }

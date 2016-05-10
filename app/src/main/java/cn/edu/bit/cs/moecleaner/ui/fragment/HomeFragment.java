@@ -1,10 +1,13 @@
 package cn.edu.bit.cs.moecleaner.ui.fragment;
 
 import android.app.ActivityManager;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.StatFs;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,12 @@ public class HomeFragment extends BaseMoeFragment {
         memoryProgressBar = (CircleProgressBar) rootView.findViewById(R.id.view3);
         storageProgressBar = (CircleProgressBar) rootView.findViewById(R.id.view2);
         cpuProgressBar = (CircleProgressBar) rootView.findViewById(R.id.view4);
+/*
+        TypedArray arr = getActivity().getTheme().obtainStyledAttributes(new int[]{
+                android.R.attr.colorPrimary, android.R.attr.colorPrimaryDark, android.R.attr.colorAccent
+        });
+        memoryProgressBar.setCenterCircleColor(arr.getColor(0, ));
+*/
 
         new Thread(new Runnable() {
             @Override
@@ -49,6 +58,8 @@ public class HomeFragment extends BaseMoeFragment {
                 initProgressBars();
             }
         }).start();
+
+
 
         return rootView;
     }

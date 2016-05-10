@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MoeCleaner</string>
+    <string name="app_name">Moe清理助手</string>
     <string name="action_settings">设置</string>
     <string name="section_format"></string>
     <string name="title_junk_clean">垃圾文件清理</string>
@@ -28,4 +28,13 @@
     <string name="text_can_clean">可清理</string>
     <string name="text_clean">清理缓存</string>
     <string name="text_scan">点我扫描缓存</string>
+    <string name="text_can_clean_cache">缓存大小：</string>
+    <string name="text_can_clean_mem">后台内存占用：</string>
+    <string name="text_clean_cache">点我清理缓存</string>
+    <string name="text_clean_cache_finish">缓存清理完成</string>
+    <string name="text_clean_mem">点我清理后台进程</string>
+    <string name="text_clean_mem_finish">后台进程清理完成</string>
+    <string name="text_scan_cache">扫描缓存</string>
+    <string name="text_scan_mem">扫描后台进程</string>
+    <string name="toast_need_storage_permission">%1$s需要读写文件系统的权限</string>
 </resources>

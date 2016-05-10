@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.StatFs;
 import android.os.storage.StorageManager;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,7 +22,15 @@ public class StorageMonitor {
             _getVolumePaths = storageManager.getClass().getMethod("getVolumePaths");
             String[] ret = (String[]) _getVolumePaths.invoke(storageManager);
             for(String i : ret) {
-                stats.add(new StatFs(i));
+                try {
+                    File file = new File(i);
+                    if(!(file.exists() && file.canRead())) {
+                        continue;
+                    }
+                    stats.add(new StatFs(i));
+                } catch (Exception e) {
+                    continue;
+                }
             }
             return stats;
         } catch (Exception e) {

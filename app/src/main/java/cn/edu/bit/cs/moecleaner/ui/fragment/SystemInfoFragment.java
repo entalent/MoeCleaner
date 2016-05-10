@@ -31,7 +31,10 @@ import cn.edu.bit.cs.moecleaner.util.TextUtil;
  */
 public class SystemInfoFragment extends BaseMoeFragment {
     View rootView;
-    static final int MSG_UPDATE_LINECHART = 0x0;
+    static final int MSG_UPDATE_LINECHART_CPU = 0x0,
+                    MSG_UPDATE_LINECHART_MEM = 0x1,
+                    MSG_INIT_LINECHART_CPU = 0x2,
+                    MSG_INIT_LINECHART_MEM = 0x3;
 
     CustomGLSurfaceView glSurfaceView;
 
@@ -123,7 +126,6 @@ public class SystemInfoFragment extends BaseMoeFragment {
             try {
                 setUpBasicInfo();
             } catch (Exception e) {
-                Toast.makeText(getActivity(), "error while setUpBasicInfo()", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 showCpuUsage = false;
                 showMemoryUsage = false;
@@ -140,10 +142,10 @@ public class SystemInfoFragment extends BaseMoeFragment {
                 rootView.post(new Runnable() {
                     @Override
                     public void run() {
-                        lineChartCpu.getLineChart().setYScope(cpuMinFreq, cpuMaxFreq);
-                        lineChartCpu.setTopText(TextUtil.formatFrequencyStr(cpuMaxFreq));
-                        lineChartCpu.setBottomText(TextUtil.formatFrequencyStr(cpuMinFreq));
-                        lineChartCpu.setVisibility(View.VISIBLE);
+                        //init cpu
+                        Message msg = new Message();
+                        msg.what = MSG_INIT_LINECHART_CPU;
+                        getFragmentHandler().sendMessage(msg);
                     }
                 });
 
@@ -152,8 +154,10 @@ public class SystemInfoFragment extends BaseMoeFragment {
                 rootView.post(new Runnable() {
                     @Override
                     public void run() {
-                        lineChartMemory.getLineChart().setYScope(0, 100);
-                        lineChartMemory.setVisibility(View.VISIBLE);
+                        //init mem
+                        Message msg = new Message();
+                        msg.what = MSG_INIT_LINECHART_MEM;
+                        getFragmentHandler().sendMessage(msg);
                     }
                 });
             }
@@ -165,8 +169,10 @@ public class SystemInfoFragment extends BaseMoeFragment {
                         rootView.post(new Runnable() {
                             @Override
                             public void run() {
-                                lineChartCpu.getLineChart().addData(currentCpuFreq);
-                                lineChartCpu.setVisibility(View.VISIBLE);
+                                //update cpu
+                                Message msg = new Message();
+                                msg.what = MSG_UPDATE_LINECHART_CPU;
+                                getFragmentHandler().sendMessage(msg);
                             }
                         });
                     } catch (Exception e) {
@@ -180,8 +186,10 @@ public class SystemInfoFragment extends BaseMoeFragment {
                         rootView.post(new Runnable() {
                             @Override
                             public void run() {
-                                lineChartMemory.getLineChart().addData(currentMemoryUsage);
-                                lineChartMemory.setVisibility(View.VISIBLE);
+                                //update mem
+                                Message msg = new Message();
+                                msg.what = MSG_UPDATE_LINECHART_MEM;
+                                getFragmentHandler().sendMessage(msg);
                             }
                         });
                     } catch (Exception e) {
@@ -190,7 +198,7 @@ public class SystemInfoFragment extends BaseMoeFragment {
                 }
 
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(700);
                 } catch (InterruptedException e) {
                     break;
                 }
@@ -200,12 +208,32 @@ public class SystemInfoFragment extends BaseMoeFragment {
 
     @Override
     public void handleMessageFromHandler(Message msg) {
-
+        switch (msg.what) {
+            case MSG_INIT_LINECHART_CPU:
+                lineChartCpu.getLineChart().setYScope(cpuMinFreq, cpuMaxFreq);
+                lineChartCpu.setTopText(TextUtil.formatFrequencyStr(cpuMaxFreq));
+                lineChartCpu.setBottomText(TextUtil.formatFrequencyStr(cpuMinFreq));
+                lineChartCpu.setVisibility(View.VISIBLE);
+                break;
+            case MSG_INIT_LINECHART_MEM:
+                lineChartMemory.getLineChart().setYScope(0, 100);
+                lineChartMemory.setVisibility(View.VISIBLE);
+                break;
+            case MSG_UPDATE_LINECHART_CPU:
+                lineChartCpu.getLineChart().addData(currentCpuFreq);
+                //lineChartCpu.setVisibility(View.VISIBLE);
+                break;
+            case MSG_UPDATE_LINECHART_MEM:
+                lineChartMemory.getLineChart().addData(currentMemoryUsage);
+                //lineChartMemory.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        System.out.println("onResume");
         try {
             updateThread = new Thread(new UpdateThreadRunnable());
             updateThread.start();
@@ -220,6 +248,7 @@ public class SystemInfoFragment extends BaseMoeFragment {
     @Override
     public void onPause() {
         super.onPause();
+        System.out.println("onPause");
         try {
             updateThread.interrupt();
             updateThread = null;

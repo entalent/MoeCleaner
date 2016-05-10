@@ -30,7 +30,18 @@
     <string name="title_cpu_mem_information">CPU &#38; RAM Information</string>
     <string name="title_gpu_information">GPU Information</string>
 
-    <string name="text_can_clean">Cache Size: </string>
-    <string name="text_scan">Scan for Cache File</string>
-    <string name="text_clean">Clean Cache File!</string>
+    <string name="text_can_clean_cache">Cache Size: </string>
+    <string name="text_scan_cache">Scan Cache File</string>
+    <string name="text_clean_cache">Clean Cache File!</string>
+    <string name="text_clean_cache_finish">Cache Cleaned!</string>
+
+    <string name="text_can_clean_mem">Memory: </string>
+    <string name="text_scan_mem">Scan Memory</string>
+    <string name="text_clean_mem">Memory Boost!</string>
+    <string name="text_clean_mem_finish">Memory Boost Finished!</string>
+
+    <string name="toast_need_storage_permission">%1$s need permission to read/write file system.</string>
+    <string name="text_can_clean">Can clean:</string>
+    <string name="text_clean">Clean cache</string>
+    <string name="text_scan">Scan Cache File</string>
 </resources>
